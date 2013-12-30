@@ -48,7 +48,7 @@ unsigned long virtaddr_to_physaddr(struct mm_struct *mm, unsigned long vaddr)
     else{
         /*Need to implement*/
         /*...................*/
-		pte = pte_offset(pud, vaddr);
+		pte = pte_offset_kernel(pmd, vaddr);
         printk("pte_val = 0x%lx\n", pte_val(*pte));
 	    printk("pte_index = %lx\n", pte_index(vaddr));
 	    if(pte_none(*pte)){
