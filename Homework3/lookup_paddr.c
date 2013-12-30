@@ -48,7 +48,16 @@ unsigned long virtaddr_to_physaddr(struct mm_struct *mm, unsigned long vaddr)
     else{
         /*Need to implement*/
         /*...................*/
-        /*...................*/
+		pte = pte_offset(pud, vaddr);
+        printk("pte_val = 0x%lx\n", pte_val(*pte));
+	    printk("pte_index = %lx\n", pte_index(vaddr));
+	    if(pte_none(*pte)){
+			printk("not mapped in pte\n");
+			return INVALID_ADDR;
+		}
+		paddr = (pte_val(*pte) & PAGE_MASK);
+		paddr = paddr | (vaddr & ~PAGE_MASK);
+		/*...................*/
         /*End of implement*/
         return paddr;
     }
